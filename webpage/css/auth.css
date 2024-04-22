@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: system-ui;
+  background-color: #353535;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #353535;
+}
+
+.auth-box {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  background: #f9f1f1;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.login-box {
+  width: 200px;
+  padding: 10px;
+  text-align: center;
+}
+
+.register-box {
+  width: 200px;
+  padding: 10px;
+  text-align: center;
+}
+
+label {
+  margin: 5px 0px 2px 15px;
+}
+
+.textbox {
+  margin: 0px 0px 20px 0px;
+}
+
+.btn {
+  width: 85%;
+}
