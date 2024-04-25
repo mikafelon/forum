@@ -16,7 +16,7 @@
                         <input class="searchbar" type="search" name="search" placeholder="Search...">
                     </form>
                 </div>
-                <div style="display: flex; width: 12vw;justify-content: space-evenly;align-items: center;">
+                <div style="display: flex; align-items: center;">
                     <div>
                         <button class="post-btn">Post</button>
                     </div>
@@ -50,11 +50,30 @@
             </div>
         </div>
         <div class="menu-panel">
-            <button class="menu-button">Category 1</button>
-            <button class="menu-button">Category 2</button>
-            <button class="menu-button">Category 3</button>
-            <!-- Add more buttons as needed -->
+            <button class="menu-button" style="padding-top: 20px;">Home</button>
+            <label>Categories</label>
+            <!-- {{range .Categories}}
+            <button class="menu-button id="{{.Name}}">{{.Name}}</button>
+            {{end}} -->
+            <button class="menu-button">Gaming</button>
+            <button class="menu-button">Music</button>
+            <button class="menu-button">Manga</button>
+            <button class="menu-button">Anime</button>
+            <button class="menu-button">Cinema</button>
+            <button class="menu-button">Art</button>
+            <button class="menu-button">Coding</button>
+            <button class="menu-button">Sport</button>
+            <label>My feed</label>
+            <button class="menu-button">My posts</button>
+            <button class="menu-button">Liked posts</button>
+            <button class="menu-button">My comments</button>
         </div>
     </div>
+</body>
+<script>
+    document.querySelector('.dark-mode-btn').addEventListener('click', function () {
+        document.body.classList.toggle('dark-mode');
+    });
+</script>
 
 </html>
