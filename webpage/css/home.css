@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: system-ui;
+  background-color: #8eb8e5;
+}
+
+.navbar {
+  box-sizing: border-box;
+  padding: 5px 15px;
+  position: fixed;
+  top: 0;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #353535;
+}
+
+.searchbar {
+  background-color: #fef9ec;
+  border: none;
+  width: 30vw;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 14px;
+  font-size: larger;
+}
+
+.post-btn,
+.settings-btn,
+.dark-mode-btn {
+  background-color: #fef9ec;
+  border: none;
+  font-size: larger;
+  padding: 5px 10px;
+  height: 32px;
+  border-radius: 14px;
+}
+
+.menu-panel {
+  position: fixed;
+  left: 0;
+  top: 50px;
+  height: calc(100% - 50px);
+  width: 200px;
+  overflow-y: auto;
+  background-color: #fef9ec;
+}
+
+.menu-button {
+  display: block;
+  width: 100%;
+  padding: 10px 10px 10px 20px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menu-button:hover {
+  background-color: #fbe6b1; /* Adjust as needed */
+}

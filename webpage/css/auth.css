@@ -3,7 +3,7 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: system-ui;
-  background-color: #353535;
+  background-color: #8eb8e5;
 }
 
 .container {
@@ -11,7 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #353535;
+  background-color: #8eb8e5;
 }
 
 .auth-box {
