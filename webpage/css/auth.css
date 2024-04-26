@@ -14,16 +14,31 @@ body {
 }
 
 .auth-box {
+  box-shadow: 20px 0px 20px #2a2a2a,
+    -20px 0px 20px #404040;
   position: absolute;
   top: 0%;
   left: 30%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 15px;
   background: #ffefc8;
   height: calc(100vh - 30px);
   width: auto;
+}
+
+.login-box {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.login-box::after {
+  content: "";
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: 0;
+  border-bottom: 3px solid #ad9a69;
 }
 
 .auth-box>* {
@@ -34,7 +49,7 @@ body {
 input[type="submit" i],
 input[type="text" i],
 input[type="password" i] {
-  padding: 5px 10px;
+  padding: 5px 10px 3px 10px;
   border: none;
   border-radius: 14px;
   font-size: medium;
