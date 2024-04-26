@@ -3,44 +3,56 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: system-ui;
-  background-color: #8eb8e5;
+  background-color: #353535;
 }
 
 .container {
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #8eb8e5;
+  background-color: #353535;
 }
 
 .auth-box {
+  position: absolute;
+  top: 0%;
+  left: 30%;
   display: flex;
-  flex-wrap: wrap;
-  padding: 20px;
-  background: #f9f1f1;
-  text-align: center;
-  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background: #ffefc8;
+  height: calc(100vh - 30px);
+  width: auto;
 }
 
-.login-box {
-  width: 200px;
-  padding: 10px;
+.auth-box>* {
+  width: 320px;
   text-align: center;
 }
 
-.register-box {
-  width: 200px;
-  padding: 10px;
-  text-align: center;
+input[type="submit" i],
+input[type="text" i],
+input[type="password" i] {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 14px;
+  font-size: medium;
+  width: 280px;
+  margin: 0px 0px 20px 0px;
+}
+
+input[type="submit" i] {
+  background-color: #353535;
+  color: #ffefc8;
+  cursor: pointer;
+  width: 230px;
+  font-weight: bold;
 }
 
 label {
   margin: 5px 0px 2px 15px;
-}
-
-.textbox {
-  margin: 0px 0px 20px 0px;
+  font-weight: bold;
 }
 
 .btn {
