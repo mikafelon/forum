@@ -8,15 +8,17 @@
 
 <body>
     <div class="home-box">
-        <form action="/search" method="get">
-            <input class="searchbar" type="search" name="search" placeholder="Search...">
-        </form>
+        <div class="search-box">
+            <form action="/search" method="get">
+                <input class="searchbar" type="search" name="search" placeholder="Search...">
+            </form>
+        </div>
         <div class="menu-box">
             <div>
                 <button class="post-btn">New post +</button>
             </div>
             <div>
-                <button class="settings-btn">
+                <button class="settings-btn" style="padding-top: 10px;">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
                         id="Capa_1" x="0px" y="0px" viewBox="0 0 512.051 512.051"
                         style="enable-background:new 0 0 512.051 512.051;" xml:space="preserve" width="20" height="20">
@@ -32,69 +34,89 @@
                 </button>
             </div>
             <div>
-                <button class="dark-mode-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24"
-                        width="20" height="20">
+                <button class="dark-mode-btn" style="padding-top: 10px;">
+                    <svg style="transform: rotate(-30deg);" xmlns="http://www.w3.org/2000/svg" id="Layer_1"
+                        data-name="Layer 1" viewBox="0 0 24 24" width="20" height="20">
                         <path
                             d="M14,24A12.013,12.013,0,0,1,2,12C1.847,3.044,12.031-2.985,19.791,1.509l1.553.862-1.543.88c-6.7,3.688-6.21,13.87.8,16.906l1.621.731-1.467,1.006A11.921,11.921,0,0,1,14,24ZM14,2A10.011,10.011,0,0,0,4,12c-.155,7.117,7.763,12.2,14.155,9.082a11.544,11.544,0,0,1-.876-18.521A9.745,9.745,0,0,0,14,2Z" />
                     </svg>
                 </button>
             </div>
         </div>
-        <div class="post-box">
-            <div class="post">
-                <div class="post-header">
-                    <div class="post-user">Username</div>
+        <div style="display: flex;flex-direction: row;position: absolute;">
+            <div class="post-box">
+                <div class="post">
+                    <div class="post-header">
+                        <div class="post-user">Username</div>
+                        <div style="padding: 5px 10px 0px 10px;">°</div>
+                        <div class="post-time">03/25/2024</div>
+                    </div>
+                    <div class="post-content">
+                        This structure provides a clear separation of the post's header, content, and footer. The header
+                        contains the username and the post date.
+                        The content is where the actual post content goes.
+                        The footer contains the number of likes and can also contain other elements like comments,
+                        shares,
+                        etc.
+                    </div>
+                    <div class="post-footer">
+                        <div>
+                            <label>50</label>
+                            <button>Like</button>
+                            <label>10</label>
+                            <button>Dislike</button>
+                            <label>5</label>
+                            <button>Comment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="comment">
+                <div class="comment-header">
+                    <div class="comment-user">Username</div>
                     <div style="padding: 5px 10px 0px 10px;">°</div>
-                    <div class="post-time">03/25/2024</div>
+                    <div class="comment-time">03/25/2024</div>
                 </div>
-                <div class="post-content">
-                    This structure provides a clear separation of the post's header, content, and footer. The header
-                    contains the username and the post date.
-                    The content is where the actual post content goes.
-                    The footer contains the number of likes and can also contain other elements like comments, shares,
-                    etc.
+                <div class="comment-content">
+                    Jordan le prince de lem-in OMG
                 </div>
-                <div class="post-footer">
+                <div class="comment-footer">
                     <div>
                         <label>50</label>
                         <button>Like</button>
                         <label>10</label>
                         <button>Dislike</button>
-                        <label>5</label>
-                        <button>Comment</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="menu-panel">
-        <div>
-            <button class="home-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="35"
-                    height="35">
-                    <path
-                        d="M24,24H0V10.043c0-.929,.42-1.79,1.151-2.363L10.151,.638c1.088-.854,2.609-.854,3.697,0l9,7.043c.731,.572,1.151,1.434,1.151,2.362v13.957ZM2,22H22V10.043c0-.31-.14-.597-.384-.787L12.616,2.212c-.363-.283-.869-.283-1.232,0L2.384,9.255c-.244,.191-.384,.479-.384,.788v11.957Z" />
-                </svg>
-                Do†.</button>
-        </div>
-        <label>Categories</label>
-        <!-- {{range .Categories}}
+        <div class="menu-panel">
+            <div>
+                <button class="home-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24"
+                        width="35" height="35">
+                        <path
+                            d="M24,24H0V10.043c0-.929,.42-1.79,1.151-2.363L10.151,.638c1.088-.854,2.609-.854,3.697,0l9,7.043c.731,.572,1.151,1.434,1.151,2.362v13.957ZM2,22H22V10.043c0-.31-.14-.597-.384-.787L12.616,2.212c-.363-.283-.869-.283-1.232,0L2.384,9.255c-.244,.191-.384,.479-.384,.788v11.957Z" />
+                    </svg>
+                    Do†.</button>
+            </div>
+            <label>Categories</label>
+            <!-- {{range .Categories}}
             <button class="menu-button id="{{.Name}}">{{.Name}}</button>
             {{end}} -->
-        <button class="menu-button">Gaming</button>
-        <button class="menu-button">Music</button>
-        <button class="menu-button">Manga</button>
-        <button class="menu-button">Anime</button>
-        <button class="menu-button">Cinema</button>
-        <button class="menu-button">Art</button>
-        <button class="menu-button">Coding</button>
-        <button class="menu-button">Sport</button>
-        <label>My feed</label>
-        <button class="menu-button">My posts</button>
-        <button class="menu-button">Liked posts</button>
-        <button class="menu-button">My comments</button>
-    </div>
+            <button class="menu-button">Gaming</button>
+            <button class="menu-button">Music</button>
+            <button class="menu-button">Manga</button>
+            <button class="menu-button">Anime</button>
+            <button class="menu-button">Cinema</button>
+            <button class="menu-button">Art</button>
+            <button class="menu-button">Coding</button>
+            <button class="menu-button">Sport</button>
+            <label>My feed</label>
+            <button class="menu-button">My posts</button>
+            <button class="menu-button">Liked posts</button>
+            <button class="menu-button">My comments</button>
+        </div>
     </div>
 </body>
 <script>
