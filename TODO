@@ -1,0 +1,47 @@
+function TODO Dot.
+
+english : pre-requisite
+unregister can only be able to read post.
+comment and post cannot be  empty.
+being able to see all the comment of a post.
+
+French : pre-requis
+les utilisateur non enregistrés ne peuvent que lire les post.
+les commentaire et les post ne peuvent pas être vides.
+être capable de voir tout les commentaires d'un post.
+
+
+adding post && select at least 1 category
+delete post
+adding liking post
+delete liking post
+adding disliking post
+delete disliking post
+adding comment 
+delete comment
+adding liking comment
+delete liking comment
+adding disliking comment
+delete disliking comment
+adding register user //allow to : post/like/dislike/comment
+adding login user
+ErrorHandler (400/404/500)
+
+see your own Post
+see your own like 
+
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Page TODO Dot.
+
+page to see user post / like 
+
+page to create a post :
+- select category 
+- placement for adding image (prep for optional)
+- type content (text)
+
+page to create a comment : 
+- adding image 
+- placement for adding image (prep for optional)
