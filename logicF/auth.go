@@ -13,7 +13,7 @@ import (
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	print(" 01")
 	if r.URL.Path != "/register/" { // if the url isn't filter it return nothing
-		ErrorHandler(w, r, http.StatusNotFound)
+		Error(w, http.StatusNotFound)
 		return
 	} else {
 

@@ -10,27 +10,8 @@ type Status struct {
 	Msg  string
 }
 
-// CustomResponseWriter wraps http.ResponseWriter to track if headers have been written.
-type CustomResponseWriter struct {
-	http.ResponseWriter
-	headersWritten bool
-}
-
-// WriteHeader marks the headers as written.
-func (w *CustomResponseWriter) WriteHeader(code int) {
-	w.headersWritten = true
-	w.ResponseWriter.WriteHeader(code)
-}
-
-// Write ensures headers are written before the body.
-func (w *CustomResponseWriter) Write(b []byte) (int, error) {
-	if !w.headersWritten {
-		w.WriteHeader(http.StatusOK)
-	}
-	return w.ResponseWriter.Write(b)
-}
-
 func Error(writer http.ResponseWriter, statusCode int) { // fonction gerant l'affichage de la page error
+
 	var msg string
 	switch statusCode {
 	// if statusCode égale a http.StatusNotFound,
@@ -43,21 +24,19 @@ func Error(writer http.ResponseWriter, statusCode int) { // fonction gerant l'af
 		msg = "Internal Server Error"
 	}
 	// initialise la variable a t la valeur de l'emplacement error.tmpl
-	t, err := template.ParseFiles("./webpage/error.html")
+	t, err := template.ParseFiles("./templates/error.html")
 	if err != nil {
 		panic(err)
 	}
+
 	// ecris dans la page reponse la valeut=r du statusCode
 	writer.WriteHeader(statusCode)
 	// execute le writer et la struct status contenant le statusCode et le msg
 	t.Execute(writer, Status{statusCode, msg})
 }
 
+/*
 func ErrorHandler(w http.ResponseWriter, r *http.Request, status int) {
-	rw := &CustomResponseWriter{ResponseWriter: w}
-	if !rw.headersWritten {
-		rw.WriteHeader(status)
-	}
 	erreur := erreur{}
 	w.WriteHeader(status)
 	tmpl, err := template.ParseFiles("./templates/error.html")
@@ -88,3 +67,4 @@ func ErrorHandler(w http.ResponseWriter, r *http.Request, status int) {
 		}
 	}
 }
+*/

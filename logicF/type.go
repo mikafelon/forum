@@ -10,12 +10,12 @@ type user struct {
 type Post struct {
 	IDPost      int
 	UserID      int
+	Username    string
 	CategoryID  int
 	Content     string
 	PublishDate string
 	Like        int
 	Dislike     int
-	// Image   string
 }
 
 type erreur struct {
