@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="forum/templates/css/home.css">
+</head>
+<style>
+    body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: system-ui;
+  background-color: #8eb8e5;
+  transition: background-color 0.2s ease;
+}
+
+.search-box {
+  position: absolute;
+  width: 100vw;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.searchbar {
+  background-color: #fef9ec;
+  border: none;
+  width: 30vw;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 14px;
+  font-size: larger;
+}
+
+.post-btn,
+.settings-btn,
+.dark-mode-btn {
+  text-align: center;
+  background-color: #fef9ec;
+  border: none;
+  font-size: larger;
+  padding: 5px 10px;
+  height: 40px;
+  border-radius: 14px;
+  margin: 0 5px;
+}
+
+.post-box {
+  position: fixed;
+  top: 100px;
+  left: 270px;
+  width: 60vw;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #fef9ec;
+  z-index: 1;
+}
+
+.post-header {
+  display: flex;
+  justify-content: start;
+  padding-bottom: 10px;
+}
+
+.post-content {
+  display: flex;
+  justify-content: start;
+  padding-bottom: 10px;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: end;
+  padding-right: 10px;
+  margin-bottom: -30px;
+}
+
+.post-footer>*>button {
+  margin-right: 15px;
+  height: 40px;
+  background-color: #404040;
+  color: #fef9ec;
+  border: 2px solid #404040;
+  font-weight: bold;
+}
+
+.post-text {
+  width: 100%;
+  height: 100%;
+  font-size: larger;
+}
+
+.comment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-box {
+  padding: 20px 20px;
+  position: fixed;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: end;
+}
+
+.menu-box>*>button {
+  margin-bottom: 10px;
+}
+
+.menu-panel {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 0;
+  height: 100%;
+  width: 230px;
+  overflow-y: auto;
+  background-color: #fef9ec;
+  transition: background-color 0.2s ease;
+}
+
+.home-btn {
+  position: relative;
+  font-size: xx-large;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 230px;
+  height: 100px;
+  padding-top: 20px;
+}
+
+.home-btn::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 0;
+  border-bottom: 3px solid #fbe6b1;
+}
+
+.home-btn:hover {
+  background-color: #fbe6b1;
+
+}
+
+.menu-panel>label {
+  display: block;
+  padding: 20px 20px 5px 20px;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.menu-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 10px 10px 10px 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: larger;
+}
+
+.menu-button::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 0;
+  border-bottom: 3px solid #fbe6b1;
+}
+
+.menu-button:last-child::after {
+  border-bottom: none;
+}
+
+.menu-button:hover {
+  background-color: #fbe6b1;
+}
+
+.dark-mode {
+  background-color: #0F2843;
+  color: #000000;
+}
+
+.dark-mode .menu-panel {
+  background-color: #c68e00;
+}
+
+.dark-mode .menu-button::after {
+  border-color: #f0b000;
+}
+
+.dark-mode .menu-button:hover {
+  background-color: #f0b000;
+}
+</style>
+<body>
+    <div class="home-box">
+        <div class="index-box">
+            <form action="/home.html" method="get">
+                <div class="menu-box">
+                    <div>
+                        <button class="post-btn">New post +</button>
+                    </div>
+                    <div>
+                        <button class="settings-btn" style="padding-top: 10px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                id="Capa_1" x="0px" y="0px" viewBox="0 0 512.051 512.051"
+                                style="enable-background:new 0 0 512.051 512.051;" xml:space="preserve" width="20" height="20">
+                                <g>
+                                    <path
+                                        d="M21.359,101.359h58.368c11.52,42.386,55.219,67.408,97.605,55.888c27.223-7.399,48.489-28.665,55.888-55.888h257.472   c11.782,0,21.333-9.551,21.333-21.333s-9.551-21.333-21.333-21.333H233.22C221.7,16.306,178.001-8.716,135.615,2.804   c-27.223,7.399-48.489,28.665-55.888,55.888H21.359c-11.782,0-21.333,9.551-21.333,21.333S9.577,101.359,21.359,101.359z" />
+                                    <path
+                                        d="M490.692,234.692h-58.368c-11.497-42.38-55.172-67.416-97.552-55.92c-27.245,7.391-48.529,28.674-55.92,55.92H21.359   c-11.782,0-21.333,9.551-21.333,21.333c0,11.782,9.551,21.333,21.333,21.333h257.493c11.497,42.38,55.172,67.416,97.552,55.92   c27.245-7.391,48.529-28.674,55.92-55.92h58.368c11.782,0,21.333-9.551,21.333-21.333   C512.025,244.243,502.474,234.692,490.692,234.692z" />
+                                    <path
+                                        d="M490.692,410.692H233.22c-11.52-42.386-55.219-67.408-97.605-55.888c-27.223,7.399-48.489,28.665-55.888,55.888H21.359   c-11.782,0-21.333,9.551-21.333,21.333c0,11.782,9.551,21.333,21.333,21.333h58.368c11.52,42.386,55.219,67.408,97.605,55.888   c27.223-7.399,48.489-28.665,55.888-55.888h257.472c11.782,0,21.333-9.551,21.333-21.333   C512.025,420.243,502.474,410.692,490.692,410.692z" />
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+                    <div>
+                        <button class="dark-mode-btn" style="padding-top: 10px;">
+                            <svg style="transform: rotate(-30deg);" xmlns="http://www.w3.org/2000/svg" id="Layer_1"
+                                data-name="Layer 1" viewBox="0 0 24 24" width="20" height="20">
+                                <path
+                                    d="M14,24A12.013,12.013,0,0,1,2,12C1.847,3.044,12.031-2.985,19.791,1.509l1.553.862-1.543.88c-6.7,3.688-6.21,13.87.8,16.906l1.621.731-1.467,1.006A11.921,11.921,0,0,1,14,24ZM14,2A10.011,10.011,0,0,0,4,12c-.155,7.117,7.763,12.2,14.155,9.082a11.544,11.544,0,0,1-.876-18.521A9.745,9.745,0,0,0,14,2Z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                {{range .}}
+
+                <div style="display: flex;flex-direction: row;position: absolute;">
+                    <div class="post-box">
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="post-user">{{.Username}}</div>
+
+                                <div style="padding: 5px 10px 0px 10px;">°</div>
+                                <div class="post-time">03/25/2024</div>
+                            </div>
+                            <div class="post-content">
+                                {{.Content}}
+                            </div>
+                            <div class="post-footer">
+                                <div>
+                                    <label>50</label>
+                                    <button>Like</button>
+                                    <label>10</label>
+                                    <button>Dislike</button>
+                                    <label>5</label>
+                                    <button>Comment</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <div class="comment-header">
+                            <div class="comment-user">Username</div>
+                            <div style="padding: 5px 10px 0px 10px;">°</div>
+                            <div class="comment-time">03/25/2024</div>
+                        </div>
+                        <div class="comment-content">
+                            Jordan le prince de lem-in OMG
+                        </div>
+                        <div class="comment-footer">
+                            <div>
+                                <label>50</label>
+                                <button>Like</button>
+                                <label>10</label>
+                                <button>Dislike</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{end}}
+
+                <div class="menu-panel">
+                    <div>
+                        <button class="home-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24"
+                                width="35" height="35">
+                                <path
+                                    d="M24,24H0V10.043c0-.929,.42-1.79,1.151-2.363L10.151,.638c1.088-.854,2.609-.854,3.697,0l9,7.043c.731,.572,1.151,1.434,1.151,2.362v13.957ZM2,22H22V10.043c0-.31-.14-.597-.384-.787L12.616,2.212c-.363-.283-.869-.283-1.232,0L2.384,9.255c-.244,.191-.384,.479-.384,.788v11.957Z" />
+                            </svg>
+                            Do†.</button>
+                    </div>
+                    <label>Categories</label>
+                    <!-- {{range .Categories}}
+                    <button class="menu-button id="{{.Name}}">{{.Name}}</button>
+                    {{end}} -->
+                    <button class="menu-button">Gaming</button>
+                    <button class="menu-button">Music</button>
+                    <button class="menu-button">Manga</button>
+                    <button class="menu-button">Anime</button>
+                    <button class="menu-button">Cinema</button>
+                    <button class="menu-button">Art</button>
+                    <button class="menu-button">Coding</button>
+                    <button class="menu-button">Sport</button>
+                    <label>My feed</label>
+                    <button class="menu-button">My posts</button>
+                    <button class="menu-button">Liked posts</button>
+                    <button class="menu-button">My comments</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    document.querySelector('.dark-mode-btn').addEventListener('click', function () {
+        document.body.classList.toggle('dark-mode');
+    });
+</script>
+
+</html>
