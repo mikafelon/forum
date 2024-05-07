@@ -3,10 +3,9 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"go-project/ascii-art-web/go-project/forum/logicF"
 	"log"
 	"net/http"
-
-	"forum/logicF"
 )
 
 func main() {
