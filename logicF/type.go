@@ -1,21 +1,31 @@
 package logicF
 
+type HomeData struct {
+	Posts      []Post
+	Categories []Category
+}
+
 type user struct {
-	ID       int
-	Username string
+	id       int
+	username string
 	password string
 	email    string
 }
 
 type Post struct {
-	IDPost      int
-	UserID      int
-	Username    string
-	CategoryID  int
-	Content     string
-	PublishDate string
-	Like        int
-	Dislike     int
+	id         int
+	userId     int
+	username   string
+	categoryId int
+	content    string
+	date       string
+	like       int
+	dislike    int
+}
+
+type Category struct {
+	id   int
+	name string
 }
 
 type erreur struct {
