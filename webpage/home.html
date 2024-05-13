@@ -73,18 +73,18 @@
           {{range .Posts}}
           <div class="post">
             <div class="post-header">
-              <div class="post-user">{{.Username}}</div>
+              <div class="post-user">{{.username}}</div>
               <div style="padding: 5px 10px 0px 10px">°</div>
-              <div class="post-time">{{.Date}}</div>
+              <div class="post-time">{{.date}}</div>
             </div>
-            <div class="post-content">{{.Content}}</div>
+            <div class="post-content">{{.content}}</div>
             <div class="post-footer">
               <div>
-                <label>{{.Likes}}</label>
+                <label>{{.like}}</label>
                 <button>Like</button>
-                <label>{{.Dislikes}}</label>
+                <label>{{.dislike}}</label>
                 <button>Dislike</button>
-                <label>{{.Comments}}</label>
+                <!-- <label>{{.comment}}</label> -->
                 <button>Comment</button>
               </div>
             </div>
@@ -127,16 +127,16 @@
           </div>
           <label>Categories</label>
           {{range .Categories}}
-          <button class="menu-button" id="{{.Name}}">{{.Name}}</button>
+          <button class="menu-button" id="{{.Name}}">{{.name}}</button>
           {{end}}
-          <button class="menu-button">Gaming</button>
+          <!-- <button class="menu-button">Gaming</button>
           <button class="menu-button">Music</button>
           <button class="menu-button">Manga</button>
           <button class="menu-button">Anime</button>
           <button class="menu-button">Cinema</button>
           <button class="menu-button">Art</button>
           <button class="menu-button">Coding</button>
-          <button class="menu-button">Sport</button>
+          <button class="menu-button">Sport</button> -->
           <label>My feed</label>
           <button class="menu-button">My posts</button>
           <button class="menu-button">Liked posts</button>
