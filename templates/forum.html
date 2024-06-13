@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" href="/static/styles-forum.css?v=1.0">
+    <meta http-equiv="refresh" content="270;url=#session-warning">
+</head>
+
+<body>
+    <div id="session-warning" style="display:none; position:fixed; top:0; left:0; width:100%; background-color:red; color:white; text-align:center; padding:10px;">
+        Votre session expirera dans 5 minutes.
+    </div>
+
+    <header>
+        <div class="header-container">
+            <h1 class="title">Forum</h1>
+            <div class="user-info">
+                <p>{{.User.Username}}</p>
+            </div>
+        </div>
+        <div class="search-filter-container">
+            <form method="GET" action="/forum">
+                <input type="text" id="searchBar" name="search" placeholder="Rechercher...">
+                <select name="category_id">
+                    <option value="">Toutes les catégories</option>
+                    {{range .Categories}}
+                    <option value="{{.ID}}">{{.Name}}</option>
+                    {{end}}
+                </select>
+                <button type="submit">Filtrer</button>
+            </form>
+        </div>
+        <div class="header-buttons">
+            <input type="checkbox" id="notificationsCheckbox" class="modal-toggle">
+            <label for="notificationsCheckbox" class="icon-button" id="heartButton">
+                &#10084;<span class="notification-count">{{.NotificationCount}}</span>
+            </label>
+            <div class="dropdown-content notifications-dropdown">
+                {{range .Notifications}}
+                <div class="notification">
+                    <p>{{.Username}} a {{.Type}} votre post "{{.PostTitle}}"</p>
+                    <span>{{.CreatedAt}}</span>
+                </div>
+                {{end}}
+            </div>
+            <input type="checkbox" id="cookieCheckbox" class="modal-toggle">
+            <label for="cookieCheckbox" class="icon-button">&#127850;</label>
+            <div class="dropdown-content">
+                <div style="padding: 10px;">
+                    <p>Votre session expirera dans 5 minutes. Veuillez sauvegarder votre travail.</p>
+                    <p>Temps restant : <span id="timer">5:00</span></p>
+                </div>
+            </div>
+            <input type="checkbox" id="settingsCheckbox" class="modal-toggle">
+            <label for="settingsCheckbox" class="icon-button">&#9881;</label>
+            <div class="dropdown-content">
+                <form method="POST" action="/login.html">
+                    <button type="submit" class="dropdown-button">Déconnexion</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <section class="posts-section">
+        {{range .Posts}}
+        <div class="post">
+            <h3>{{.Username}}</h3>
+            <p>{{.Content}}</p>
+            <span>{{.CreatedAt}}</span>
+            <div class="buttons">
+                <form method="POST" action="/like">
+                    <input type="hidden" name="post_id" value="{{.ID}}">
+                    <button type="submit" class="like-button" {{if .UserLiked}}disabled{{end}}>Like</button>
+                </form>
+                <form method="POST" action="/dislike">
+                    <input type="hidden" name="post_id" value="{{.ID}}">
+                    <button type="submit" class="dislike-button" {{if .UserDisliked}}disabled{{end}}>Dislike</button>
+                </form>
+                <input type="checkbox" id="commentCheckbox{{.ID}}" class="modal-toggle">
+                <label for="commentCheckbox{{.ID}}" class="icon-button">&#9998;</label>
+                <div class="dropdown-content">
+                    <form method="POST" action="/comment">
+                        <input type="hidden" name="post_id" value="{{.ID}}">
+                        <textarea name="comment" rows="4" cols="50" placeholder="Écrire un commentaire..."></textarea>
+                        <button type="submit">Envoyer</button>
+                    </form>
+                    <div class="comments-section">
+                        {{range .Comments}}
+                        <div class="comment">
+                            <p><strong>{{.Username}}:</strong> {{.Content}}</p>
+                            <span>{{.CreatedAt}}</span>
+                        </div>
+                        {{end}}
+                    </div>
+                </div>
+            </div>
+            <p>Likes: {{.Likes}} | Dislikes: {{.Dislikes}}</p>
+        </div>
+        {{end}}
+    </section>
+
+    <footer>
+        <div class="nav-button">
+            <button class="icon-button" onclick="window.location.href='/forum'">&#8962;</button>
+            <p>Accueil</p>
+        </div>
+        <div class="nav-button">
+            <button class="icon-button" onclick="window.location.href='/post.html'">&#43;</button>
+            <p>Poste</p>
+        </div>
+        <div class="nav-button">
+            <button class="icon-button" onclick="window.location.href='/profile'">
+                <img src="/static/default-profile.png" alt="Profile Picture">
+            </button>
+            <p>Profil</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                document.getElementById('session-warning').style.display = 'block';
+                startTimer();
+            }, 270000); // 4 minutes and 30 seconds in milliseconds
+        });
+
+        function startTimer() {
+            var timerElement = document.getElementById('timer');
+            var duration = 300; // 5 minutes in seconds
+            setInterval(function() {
+                var minutes = Math.floor(duration / 60);
+                var seconds = duration % 60;
+                timerElement.textContent = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+                if (--duration < 0) {
+                    duration = 0;
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>

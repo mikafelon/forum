@@ -1,0 +1,112 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1);
+    /* Rose gradient background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    width: 100%;
+}
+
+.title {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 2em;
+    color: white;
+    /* Change title color to white */
+    margin: 0;
+}
+
+.create-post-section {
+    flex: 1;
+    background: linear-gradient(to right, #f7f4f5, #fffffe);
+    /* Rose gradient background */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Center content horizontally */
+    width: 100%;
+}
+
+.create-post-section form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    /* Background color for form */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    /* Limit form width */
+}
+
+.create-post-section label {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    width: 100%;
+    /* Make label take full width */
+    text-align: left;
+    /* Align text to the left */
+}
+
+.create-post-section textarea {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1);
+    /* Rose gradient background */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    width: 100%;
+}
+
+.nav-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.8em;
+}
+
+.nav-button .icon-button {
+    font-size: 2em;
+    margin-bottom: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    /* Change icon button color to white */
+}
+
+.nav-button .icon-button img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
