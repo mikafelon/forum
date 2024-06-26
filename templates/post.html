@@ -1,58 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Create Post</title>
+        <link rel="stylesheet" href="/static/styles-post.css?v=1.0">
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Post</title>
-    <link rel="stylesheet" href="/static/styles-post.css?v=1.0">
-</head>
+    <body>
+        <div class="container">
+            <header>
+                <h1 class="title">Create Post</h1>
+            </header>
+            <section class="create-post-section">
+                <form id="postForm" method="post" action="/post">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required><br>
 
-<body>
-    <div class="container">
-        <header>
-            <h1 class="title">Create Post</h1>
-        </header>
-        <section class="create-post-section">
-            <form id="postForm" method="post" action="/post">
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required><br>
+                    <label for="content">Content:</label>
+                    <textarea id="content" name="content" rows="10" cols="50" required></textarea><br>
 
-                <label for="content">Content:</label>
-                <textarea id="content" name="content" rows="10" cols="50" required></textarea><br>
+                    <label for="category">Category:</label>
+                    <select id="category" name="category_id" multiple required>
+                        <option value="">Select a category</option>
+                        {{range. }}
+                            <option value="{{.ID}}">{{.Name}}</option>
+                        {{end}}
+                    </select><br>
 
-                <label for="category">Category:</label>
-                <select id="category" name="category_id" required>
-                    <option value="">Select a category</option>
-                    {{range .}}
-                    <option value="{{.ID}}">{{.Name}}</option>
-                    {{end}}
-                </select><br>
-
-                <button type="submit">Post</button>
+                    <button type="submit">Post</button>
+                </form>
+            </section>
             </form>
-        </section>
-        </form>
-        </section>
-        <footer>
-            <div class="nav-button">
-                <button class="icon-button" onclick="window.location.href='/forum'">&#8962;</button>
-                <p>Accueil</p>
-            </div>
-            <div class="nav-button">
-                <button class="icon-button" onclick="window.location.href='/post.html'">&#43;</button>
-                <p>Poste</p>
-            </div>
-            <div class="nav-button">
-                <button class="icon-button" onclick="window.location.href='/profile'">
-                    <img src="/static/default-profile.png" alt="Profile Picture">
-                </button>
-                <p>Profil</p>
-            </div>
+            </section>
+            <footer>
+                <div class="nav-button">
+                    <button class="icon-button" onclick="window.location.href='/forum'">&#8962;</button>
+                    <p>Accueil</p>
+                </div>
+                <div class="nav-button">
+                    <button class="icon-button" onclick="window.location.href='/post.html'">&#43;</button>
+                    <p>Poste</p>
+                </div>
+                <div class="nav-button">
+                    <button class="icon-button" onclick="window.location.href='/profile'">
+                        <img src="../static/default_user.png" alt="Profile Picture">
+                    </button>
+                    <p>Profil</p>
+                </div>
 
-    </div>
-    </footer>
-    </div>
-</body>
-
+        </div>
+        </footer>
+        </div>
+    </body>
 </html>

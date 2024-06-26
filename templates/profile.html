@@ -1,43 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" href="/static/styles-profile.css?v=1.0">
-</head>
-
-<body>
-    <div class="profile-container">
-        <div class="profile-header">
-            <div class="profile-bubble">
-                <img src="/static/default-profile.png" alt="Profile Picture">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profile</title>
+        <link rel="stylesheet" href="/static/styles-forum.css?v=1.0">
+        <link rel="stylesheet" href="../static/styles-profile.css?v=1.0">
+    </head>
+    <body>
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-bubble">
+                    <img src="../static/default_user.png" alt="Profile Picture">
+                </div>
+                <p>{{.User.Username}}</p>
             </div>
-            <h2>{{.Username}}</h2>
+            <div class="profile-details">
+                <section class="posts-section">
+                    {{range .Posts}}
+                    <div class="post">
+                        <h3>{{.Title}}</h3>
+                        <p>{{.Content}}</p>
+                        <span>{{.CreatedAt}}</span>
+                        <div class="buttons">
+                            <form method="POST" action="/like">
+                                <input type="hidden" name="post_id" value="{{.ID}}">
+                                <button type="submit" class="like-button" {{if .UserLiked}}disabled{{end}}>Like</button>
+                            </form>
+                            <form method="POST" action="/dislike">
+                                <input type="hidden" name="post_id" value="{{.ID}}">
+                                <button type="submit" class="dislike-button" {{if .UserDisliked}}disabled{{end}}>Dislike</button>
+                            </form>
+                            <input type="checkbox" id="commentCheckbox{{.ID}}" class="modal-toggle">
+                            <label for="commentCheckbox{{.ID}}" class="icon-button">&#9998;</label>
+                            <div class="dropdown-content">
+                                <form method="POST" action="/comment">
+                                    <input type="hidden" name="post_id" value="{{.ID}}">
+                                    <textarea name="comment" rows="4" cols="50" placeholder="Écrire un commentaire..."></textarea>
+                                    <button type="submit">Envoyer</button>
+                                </form>
+                            </div>
+                        </div>
+                        <p>Likes: {{.Likes}} | Dislikes: {{.Dislikes}}</p>
+                        <div class="comments-section">
+                            {{range .Comments}}
+                            <div class="comment">
+                                <p><strong>{{.Username}}:</strong> {{.Content}}</p>
+                                <span>{{.CreatedAt}}</span>
+                                <div class="buttons">
+                                    <form method="POST" action="/likeComment">
+                                        <input type="hidden" name="comment_id" value="{{.ID}}">
+                                        <button type="submit" class="like-button" {{if .UserLiked}}disabled{{end}}>Like</button>
+                                    </form>
+                                    <form method="POST" action="/dislikeComment">
+                                        <input type="hidden" name="comment_id" value="{{.ID}}">
+                                        <button type="submit" class="dislike-button" {{if .UserDisliked}}disabled{{end}}>Dislike</button>
+                                    </form>
+                                </div>
+                                <p>Likes: {{.Likes}} | Dislikes: {{.Dislikes}}</p>
+                            </div>
+                            {{end}}
+                        </div>
+                    </div>
+                    {{end}}
+                </section>
+            </div>
         </div>
-        <div class="profile-details">
-            <!-- Additional profile details can be added here -->
-        </div>
-    </div>
-    <footer>
-        <div class="nav-button">
-            <button class="icon-button" onclick="window.location.href='/forum'">&#8962;</button>
-            <p>Accueil</p>
-        </div>
-        <div class="nav-button">
-            <button class="icon-button" onclick="window.location.href='/post'">&#43;</button>
-            <p>Poste</p>
-        </div>
-        <div class="nav-button">
-            <button class="icon-button" onclick="window.location.href='/profile'">
-                <img src="/static/default-profile.png" alt="Profile Picture">
-            </button>
-            <p>Profil</p>
-        </div>
-
-        </div>
-    </footer>
-</body>
-
+        <footer>
+            <div class="nav-button">
+                <button class="icon-button" onclick="window.location.href='/forum'">&#8962;</button>
+                <p>Accueil</p>
+            </div>
+            <div class="nav-button">
+                <button class="icon-button" onclick="window.location.href='/post'">&#43;</button>
+                <p>Poste</p>
+            </div>
+            <div class="nav-button">
+                <button class="icon-button" onclick="window.location.href='/profile'">
+                    <img src="../static/default_user.png" alt="Profile Picture">
+                </button>
+                <p>Profil</p>
+            </div>
+        </footer>
+    </body>
 </html>

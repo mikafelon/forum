@@ -4,3 +4,4 @@ ID: 9e84eb0b-decb-42b3-b3f7-1cc716c889f3, FirstName: alyson, LastName: laurant, 
 ID: a99fd3db-c799-44aa-91aa-fdf46d8e4c72, FirstName: pat, LastName: hir, Email: begin@gmail.com, Username: pathir, CreatedAt: 2024-05-28T22:56:22+02:00
 ID: 9096201d-7ba6-4700-9816-c5c1bfb254b3, FirstName: mikael, LastName: salope, Email: mikael.salope@gmail.com, Username: mikaelss, CreatedAt: 2024-05-30T10:15:54+02:00
 ID: 13b71c08-9d44-4e0a-9cb7-0a5be17e9e01, FirstName: luca, LastName: lulu, Email: lululuca@gmail.com, Username: lulu, CreatedAt: 2024-06-07T12:30:20+02:00
+ID: 0beabd90-9ca5-4521-84ab-99fd58021b2b, FirstName: test, LastName: jordan, Email: test.jordan@sfr.fr, Username: testouille, CreatedAt: 2024-06-21T09:38:01+02:00

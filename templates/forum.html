@@ -57,7 +57,7 @@
             <input type="checkbox" id="settingsCheckbox" class="modal-toggle">
             <label for="settingsCheckbox" class="icon-button">&#9881;</label>
             <div class="dropdown-content">
-                <form method="POST" action="/login.html">
+                <form method="POST" action="/index.html">
                     <button type="submit" class="dropdown-button">Déconnexion</button>
                 </form>
             </div>
@@ -67,7 +67,7 @@
     <section class="posts-section">
         {{range .Posts}}
         <div class="post">
-            <h3>{{.Username}}</h3>
+            <h3>{{.Title}} - {{.Username}}</h3>
             <p>{{.Content}}</p>
             <span>{{.CreatedAt}}</span>
             <div class="buttons">
@@ -87,17 +87,28 @@
                         <textarea name="comment" rows="4" cols="50" placeholder="Écrire un commentaire..."></textarea>
                         <button type="submit">Envoyer</button>
                     </form>
-                    <div class="comments-section">
-                        {{range .Comments}}
-                        <div class="comment">
-                            <p><strong>{{.Username}}:</strong> {{.Content}}</p>
-                            <span>{{.CreatedAt}}</span>
-                        </div>
-                        {{end}}
-                    </div>
                 </div>
             </div>
             <p>Likes: {{.Likes}} | Dislikes: {{.Dislikes}}</p>
+            <div class="comments-section">
+                {{range .Comments}}
+                <div class="comment">
+                    <p><strong>{{.Username}}:</strong> {{.Content}}</p>
+                    <span>{{.CreatedAt}}</span>
+                    <div class="buttons">
+                        <form method="POST" action="/likeComment">
+                            <input type="hidden" name="comment_id" value="{{.ID}}">
+                            <button type="submit" class="like-button" {{if .UserLiked}}disabled{{end}}>Like</button>
+                        </form>
+                        <form method="POST" action="/dislikeComment">
+                            <input type="hidden" name="comment_id" value="{{.ID}}">
+                            <button type="submit" class="dislike-button" {{if .UserDisliked}}disabled{{end}}>Dislike</button>
+                        </form>
+                    </div>
+                    <p>Likes: {{.Likes}} | Dislikes: {{.Dislikes}}</p>
+                </div>
+                {{end}}
+            </div>
         </div>
         {{end}}
     </section>
@@ -105,15 +116,15 @@
     <footer>
         <div class="nav-button">
             <button class="icon-button" onclick="window.location.href='/forum'">&#8962;</button>
-            <p>Accueil</p>
+            <p>Home</p>
         </div>
         <div class="nav-button">
             <button class="icon-button" onclick="window.location.href='/post.html'">&#43;</button>
-            <p>Poste</p>
+            <p>Post</p>
         </div>
         <div class="nav-button">
             <button class="icon-button" onclick="window.location.href='/profile'">
-                <img src="/static/default-profile.png" alt="Profile Picture">
+                <img src="../static/default_user.png" alt="Profile Picture">
             </button>
             <p>Profil</p>
         </div>

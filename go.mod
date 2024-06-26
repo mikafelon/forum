@@ -1,6 +1,6 @@
-module forum
+module div-01/forum
 
-go 1.21
+go 1.19
 
 require golang.org/x/crypto v0.0.0-20210421170649-83a5a9bb288b
 

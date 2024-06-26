@@ -47,25 +47,29 @@ CREATE TABLE IF NOT EXISTS likes (
     FOREIGN KEY(comment_id) REFERENCES comments(id)
 );
 
-CREATE TABLE IF NOT EXISTS user_likes (
+CREATE TABLE IF NOT EXISTS user_likes  (
     id TEXT PRIMARY KEY,
-    user_id TEXT,
-    post_id TEXT,
-    value INTEGER, -- 1 for like, -1 for dislike
-    created_at TEXT,
+    user_id TEXT NOT NULL,
+    post_id TEXT, -- can be NULL if it's a comment like
+    comment_id TEXT, -- can be NULL if it's a post like
+    value INTEGER NOT NULL, -- 1 for like, -1 for dislike
+    created_at TEXT NOT NULL,
     FOREIGN KEY(user_id) REFERENCES users(id),
-    FOREIGN KEY(post_id) REFERENCES posts(id)
+    FOREIGN KEY(post_id) REFERENCES posts(id) ON DELETE CASCADE,
+    FOREIGN KEY(comment_id) REFERENCES comments(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS notifications (
     id TEXT PRIMARY KEY,
     user_id TEXT NOT NULL,
     post_id TEXT NOT NULL,
+    comment_id TEXT NOT NULL,
     type TEXT NOT NULL, -- "like" or "dislike"
     created_at TEXT NOT NULL,
     is_read INTEGER DEFAULT 0,
     FOREIGN KEY(user_id) REFERENCES users(id),
-    FOREIGN KEY(post_id) REFERENCES posts(id)
+    FOREIGN KEY(post_id) REFERENCES posts(id),
+    FOREIGN KEY(comment_id) REFERENCES comments(id)
 );
 
 CREATE TABLE IF NOT EXISTS sessions (
