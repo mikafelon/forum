@@ -3,7 +3,7 @@ package queryF
 import (
 	"database/sql"
 
-	"div-01/forumM/Logic/typeF"
+	"forum/Logic/typeF"
 )
 
 func GetCategories(db *sql.DB) ([]typeF.Category, error) {

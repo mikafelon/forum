@@ -1,4 +1,4 @@
-module div-01/forum
+module forum
 
 go 1.19
 

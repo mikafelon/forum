@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	"div-01/forumM/Logic/queryF"
-	"div-01/forumM/Logic/sessionF"
+	"forum/Logic/queryF"
+	"forum/Logic/sessionF"
 )
 
 func ExtendSessionHandler(w http.ResponseWriter, r *http.Request) {

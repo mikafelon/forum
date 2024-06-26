@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"log"
 
-	"div-01/forumM/Logic/typeF"
+	"forum/Logic/typeF"
 )
 
 func InsertPost(id, userID, title, content, categoryID, createdAt string, db *sql.DB) error {

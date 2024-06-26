@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"div-01/forumM/Logic/handlersF"
+	"forum/Logic/handlersF"
 
 	_ "github.com/mattn/go-sqlite3"
 )

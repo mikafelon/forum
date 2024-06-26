@@ -3,7 +3,7 @@ package queryF
 import (
 	"database/sql"
 
-	"div-01/forumM/Logic/typeF"
+	"forum/Logic/typeF"
 )
 
 func GetNotifications(userID string, db *sql.DB) ([]typeF.Notification, error) {

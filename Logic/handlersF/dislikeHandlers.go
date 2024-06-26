@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"div-01/forumM/Logic/queryF"
+	"forum/Logic/queryF"
 )
 
 func DislikeHandler(w http.ResponseWriter, r *http.Request) {

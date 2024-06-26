@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"log"
 
-	"div-01/forumM/Logic/typeF"
+	"forum/Logic/typeF"
 )
 
 func GetComments(postID string, db *sql.DB) ([]typeF.Comment, error) {

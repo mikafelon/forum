@@ -5,8 +5,8 @@ import (
 	"html/template"
 	"net/http"
 
-	"div-01/forumM/Logic/queryF"
-	"div-01/forumM/Logic/typeF"
+	"forum/Logic/queryF"
+	"forum/Logic/typeF"
 )
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {

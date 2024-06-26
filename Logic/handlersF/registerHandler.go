@@ -9,8 +9,8 @@ import (
 	"os"
 	"time"
 
-	"div-01/forumM/Logic/queryF"
-	"div-01/forumM/Logic/typeF"
+	"forum/Logic/queryF"
+	"forum/Logic/typeF"
 
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"

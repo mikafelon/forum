@@ -3,7 +3,7 @@ package queryF
 import (
 	"database/sql"
 
-	"div-01/forumM/Logic/typeF"
+	"forum/Logic/typeF"
 )
 
 func InsertUser(id, email, username, password, firstName, lastName, createdAt string, db *sql.DB) error {

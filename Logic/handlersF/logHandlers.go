@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"div-01/forumM/Logic/queryF"
+	"forum/Logic/queryF"
 
 	"golang.org/x/crypto/bcrypt"
 )

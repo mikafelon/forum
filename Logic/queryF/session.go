@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"div-01/forumM/Logic/sessionF"
+	"forum/Logic/sessionF"
 )
 
 func GetSessionUserID(r *http.Request, db *sql.DB) (string, error) {

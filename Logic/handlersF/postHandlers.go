@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"div-01/forumM/Logic/queryF"
+	"forum/Logic/queryF"
 
 	"github.com/google/uuid"
 )
