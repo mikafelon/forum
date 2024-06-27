@@ -133,13 +133,6 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            setTimeout(function () {
-                document.getElementById('session-warning').style.display = 'block';
-                startTimer();
-            }, 270000); // 4 minutes and 30 seconds in milliseconds
-        });
-
         function startTimer() {
             var timerElement = document.getElementById('timer');
             var duration = 30000; // 500 minutes in seconds
