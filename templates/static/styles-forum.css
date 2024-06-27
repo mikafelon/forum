@@ -1,11 +1,10 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: system-ui;
     display: flex;
     flex-direction: column;
     height: 100vh;
     overflow: hidden;
-    /* Prevent body from scrolling */
 }
 
 .background-gradient {
@@ -28,7 +27,6 @@ header {
 }
 
 .title {
-    font-family: 'Brush Script MT', cursive;
     font-size: 2em;
     color: #333;
     margin: 0;

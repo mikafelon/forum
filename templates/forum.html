@@ -10,7 +10,8 @@
 </head>
 
 <body>
-    <div id="session-warning" style="display:none; position:fixed; top:0; left:0; width:100%; background-color:red; color:white; text-align:center; padding:10px;">
+    <div id="session-warning"
+        style="display:none; position:fixed; top:0; left:0; width:100%; background-color:red; color:white; text-align:center; padding:10px;">
         Votre session expirera dans 5 minutes.
     </div>
 
@@ -102,7 +103,8 @@
                         </form>
                         <form method="POST" action="/dislikeComment">
                             <input type="hidden" name="comment_id" value="{{.ID}}">
-                            <button type="submit" class="dislike-button" {{if .UserDisliked}}disabled{{end}}>Dislike</button>
+                            <button type="submit" class="dislike-button" {{if
+                                .UserDisliked}}disabled{{end}}>Dislike</button>
                         </form>
                     </div>
                     <p>Likes: {{.Likes}} | Dislikes: {{.Dislikes}}</p>
@@ -131,8 +133,8 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(function() {
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
                 document.getElementById('session-warning').style.display = 'block';
                 startTimer();
             }, 270000); // 4 minutes and 30 seconds in milliseconds
@@ -140,8 +142,8 @@
 
         function startTimer() {
             var timerElement = document.getElementById('timer');
-            var duration = 300; // 5 minutes in seconds
-            setInterval(function() {
+            var duration = 30000; // 500 minutes in seconds
+            setInterval(function () {
                 var minutes = Math.floor(duration / 60);
                 var seconds = duration % 60;
                 timerElement.textContent = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;

@@ -27,7 +27,7 @@ func ExtendSessionHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	expiration := time.Now().Add(5 * time.Minute)
+	expiration := time.Now().Add(500 * time.Minute)
 	cookie := http.Cookie{
 		Name:     "session_id",
 		Value:    sessionID,

@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: system-ui;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,7 +29,6 @@ header {
 }
 
 .title {
-    font-family: 'Brush Script MT', cursive;
     font-size: 2em;
     color: white;
     /* Change title color to white */

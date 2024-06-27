@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
+	"regexp"
 	"time"
 
 	"forum/Logic/queryF"
@@ -28,11 +29,16 @@ func CreatePostHandler(w http.ResponseWriter, r *http.Request) {
 			Content    string `json:"content"`
 			CategoryID string `json:"category_id"`
 		}
+		// Compile regex to match only whitespace
+		whitespaceOnly := regexp.MustCompile(`^\s*$`)
+
 		input.Title = r.FormValue("title")
 		input.Content = r.FormValue("content")
 		input.CategoryID = r.FormValue("category_id")
-		if input.Title == "" || input.Content == "" || input.CategoryID == "" {
-			http.Error(w, "Title, Content, and Category are required", http.StatusBadRequest)
+
+		// Check if the title or content consists only of whitespace
+		if whitespaceOnly.MatchString(input.Title) || whitespaceOnly.MatchString(input.Content) || input.CategoryID == "" {
+			http.Error(w, "Title and Content cannot be empty or consist only of spaces", http.StatusBadRequest)
 			return
 		}
 		postID := uuid.New().String()
