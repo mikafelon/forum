@@ -23,7 +23,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer db.Close()
 	if r.Method == http.MethodGet {
-		tmpl, err := template.ParseFiles("templates/register.html")
+		tmpl, err := template.ParseFiles("templates/forum.html")
 		if err != nil {
 			http.Error(w, "Failed to load template", http.StatusInternalServerError)
 			return
@@ -39,8 +39,6 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 			Username  string `json:"username"`
 			Password  string `json:"password"`
 		}
-		input.FirstName = r.FormValue("first_name")
-		input.LastName = r.FormValue("last_name")
 		input.Email = r.FormValue("email")
 		input.Username = r.FormValue("username")
 		input.Password = r.FormValue("password")
@@ -51,7 +49,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 
 		if userExists(input.Email, db) {
 			data.Error = "Email already registered"
-			tmpl, err := template.ParseFiles("templates/register.html")
+			tmpl, err := template.ParseFiles("templates/forum.html")
 			if err != nil {
 				http.Error(w, "Failed to load template", http.StatusInternalServerError)
 				return

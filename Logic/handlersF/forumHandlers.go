@@ -18,7 +18,7 @@ func ForumHandler(w http.ResponseWriter, r *http.Request) {
 	userID, err := queryF.GetSessionUserID(r, db)
 	if err != nil || userID == "guest" {
 		// Rediriger vers la page de login si la session est expirée ou absente
-		http.Redirect(w, r, "/login.html", http.StatusSeeOther)
+		http.Redirect(w, r, "/forum.html", http.StatusSeeOther)
 		return
 	}
 

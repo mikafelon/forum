@@ -10,21 +10,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func LogoutHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method == http.MethodPost {
-		// Clear the session cookie
-		cookie := http.Cookie{
-			Name:     "session_id",
-			Value:    "",
-			Expires:  time.Now().Add(-1 * time.Hour), // Expire the cookie
-			HttpOnly: true,
-		}
-		http.SetCookie(w, &cookie)
-		// Redirect to login page
-		http.Redirect(w, r, "/login.html", http.StatusSeeOther)
-	}
-}
-
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	db, err := sql.Open("sqlite3", "./db/forum.db")
 	if err != nil {
@@ -32,7 +17,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer db.Close()
 	if r.Method == http.MethodGet {
-		http.ServeFile(w, r, "templates/login.html")
+		http.ServeFile(w, r, "templates/forum.html")
 		return
 	}
 	if r.Method == http.MethodPost {
@@ -60,5 +45,20 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		queryF.SetSessionCookie(w, user.ID, db)
 		// Redirect to forum
 		http.Redirect(w, r, "/forum", http.StatusSeeOther)
+	}
+}
+
+func LogoutHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		// Clear the session cookie
+		cookie := http.Cookie{
+			Name:     "session_id",
+			Value:    "",
+			Expires:  time.Now().Add(-1 * time.Hour), // Expire the cookie
+			HttpOnly: true,
+		}
+		http.SetCookie(w, &cookie)
+		// Redirect to login page
+		http.Redirect(w, r, "/forum.html", http.StatusSeeOther)
 	}
 }

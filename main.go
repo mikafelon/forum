@@ -32,7 +32,6 @@ func InitDatabase() {
 func main() {
 	InitDatabase()
 	defer db.Close()
-	http.HandleFunc("/", handlersF.IndexHandler)
 	http.HandleFunc("/register", handlersF.RegisterHandler)
 	http.HandleFunc("/login", handlersF.LoginHandler)
 	http.HandleFunc("/forum", handlersF.ForumHandler)
@@ -56,8 +55,6 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	// Serve templates
-	http.HandleFunc("/register.html", handlersF.ServeTemplate)
-	http.HandleFunc("/login.html", handlersF.ServeTemplate)
 	http.HandleFunc("/forum.html", handlersF.ServeTemplate)
 	http.HandleFunc("/profile.html", handlersF.ServeTemplate)
 	log.Println("Server started at :8080")

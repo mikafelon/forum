@@ -17,7 +17,7 @@ func ExtendSessionHandler(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 	userID, err := queryF.GetSessionUserID(r, db)
 	if err != nil || userID == "guest" {
-		http.Redirect(w, r, "/login.html", http.StatusSeeOther)
+		http.Redirect(w, r, "/forum.html", http.StatusSeeOther)
 		return
 	}
 
