@@ -30,6 +30,7 @@ func InitDatabase() {
 }
 
 func main() {
+	print("test")
 	InitDatabase()
 	defer db.Close()
 	http.HandleFunc("/register", handlersF.RegisterHandler)
