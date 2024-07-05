@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: system-ui;
+    font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -24,7 +24,9 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1);
+    background: linear-gradient(45deg, #f3b42c,  #ffbf36, #f1c25a, #f1c25a, #ffbd2e);
+    animation: gradientAnimation 20s ease infinite;
+
     flex-shrink: 0;
 }
 
@@ -54,9 +56,22 @@ footer {
     justify-content: space-around;
     align-items: center;
     padding: 10px 0;
-    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1);
+    background: linear-gradient(45deg, #3cb1ff, #3cb1ff, #65befa, #84ceff, #3cb1ff);
+    animation: gradientAnimation 25s ease infinite;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .nav-button {

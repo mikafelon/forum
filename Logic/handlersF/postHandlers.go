@@ -4,10 +4,9 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
-	"regexp"
 	"time"
 
-	"forum/Logic/queryF"
+	"div-01/forum/Logic/queryF"
 
 	"github.com/google/uuid"
 )
@@ -24,21 +23,22 @@ func CreatePostHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if r.Method == http.MethodPost {
+		err := r.ParseMultipartForm(10 << 20) // 10 MB max memory
+		if err != nil {
+			log.Println("Error parsing multipart form:", err)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return
+		}
 		var input struct {
 			Title      string `json:"title"`
 			Content    string `json:"content"`
-			CategoryID string `json:"category_id"`
+			CategoryID string `json:"category_id[]"`
 		}
-		// Compile regex to match only whitespace
-		whitespaceOnly := regexp.MustCompile(`^\s*$`)
-
 		input.Title = r.FormValue("title")
 		input.Content = r.FormValue("content")
-		input.CategoryID = r.FormValue("category_id")
-
-		// Check if the title or content consists only of whitespace
-		if whitespaceOnly.MatchString(input.Title) || whitespaceOnly.MatchString(input.Content) || input.CategoryID == "" {
-			http.Error(w, "Title and Content cannot be empty or consist only of spaces", http.StatusBadRequest)
+		categoryIDs := r.MultipartForm.Value["category_id[]"]
+		if input.Title == "" || input.Content == "" || categoryIDs[0] == "" {
+			http.Error(w, "Title, Content, and Category are required", http.StatusBadRequest)
 			return
 		}
 		postID := uuid.New().String()
@@ -48,6 +48,16 @@ func CreatePostHandler(w http.ResponseWriter, r *http.Request) {
 			log.Printf("Error inserting post: %v\n", err)
 			http.Error(w, "Failed to create post", http.StatusInternalServerError)
 			return
+		}
+		for _, categoryP := range categoryIDs {
+			// print(categoryP)
+			postCatID := uuid.New().String()
+			err := queryF.InsertCategoriesPost(postCatID, postID, categoryP, db)
+			if err != nil {
+				log.Printf("Error attributing categories for a post: %v\n", err)
+				http.Error(w, "Failed to create post", http.StatusInternalServerError)
+				return
+			}
 		}
 		// Redirect to forum
 		http.Redirect(w, r, "/forum", http.StatusSeeOther)

@@ -1,25 +1,32 @@
-# Utiliser l'image de base golang
-FROM golang:1.20
+# Use the official Golang image as a parent image
+FROM golang:1.19
 
-# Définir le répertoire de travail
-WORKDIR /app
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
-# Copier les fichiers go.mod et go.sum et télécharger les dépendances
-COPY go.mod go.sum ./
-RUN go mod download
+# Add metadata to the image
+LABEL version="1.0"
+LABEL description="Forum Application"
+LABEL author="Your Name"
 
-# Copier le reste des fichiers de l'application
+# Set CGO_ENABLED to 1
+ENV CGO_ENABLED=1
+ENV PORT=8080
+
+# Copy the go.mod and go.sum files to the working directory
+COPY go.mod ./
+
+# Download and install dependencies
+RUN go mod download && go mod tidy
+
+# Copy the rest of the application code to the working directory
 COPY . .
 
-# Lister les fichiers dans le répertoire des templates pour vérification
-RUN ls -la /app/templates
-RUN ls -la /app/static
+# Build the application with CGO enabled
+RUN GOOS=linux go build -a -installsuffix cgo -o app .
 
-# Compiler l'application
-RUN go build -o main .
-
-# Exposer le port sur lequel l'application s'exécute
+# Expose port 443 for the application
 EXPOSE 8080
 
-# Exécuter l'application
-CMD ["./main"]
+# Run the application
+CMD ["./app"]

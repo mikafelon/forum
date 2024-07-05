@@ -5,39 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forum</title>
-    <link rel="stylesheet" href="/static/forum.css?v=1.0">
+    <link rel="stylesheet" href="/static/styles-forum.css?v=1.0">
     <meta http-equiv="refresh" content="270;url=#session-warning">
 </head>
 
 <body>
-    <div class="backdrop" style="display:none;" onclick="closeLoginForm()"></div>
-    <div id="loginPopup" class="login-popup" style="display:none;">
-        <span class="close-btn" onclick="closeLoginForm()">&times;</span>
-        <div class="popup-content">
-            <div class="login-content">
-                <form action="/login" method="post">
-                    <label for="username">Email:</label>
-                    <input type="text" id="email" name="email">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password">
-                    <input type="submit" value="Login">
-                </form>
-            </div>
-            <div class="register-content">
-                <form action="/register" method="post">
-                    <label for="reg-username">Username:</label>
-                    <input type="text" id="reg-username" name="username">
-                    <label for="reg-email">Email:</label>
-                    <input type="email" id="reg-email" name="email">
-                    <label for="reg-password">Password:</label>
-                    <input type="password" id="reg-password" name="password">
-                    <input type="submit" value="Register">
-                </form>
-            </div>
-        </div>
-    </div>
-    <div id="session-warning"
-        style="display:none; position:fixed; top:0; left:0; width:100%; background-color:red; color:white; text-align:center; padding:10px;">
+    <div id="session-warning" style="display:none; position:fixed; top:0; left:0; width:100%; background-color:red; color:white; text-align:center; padding:10px;">
         Votre session expirera dans 5 minutes.
     </div>
 
@@ -77,14 +50,16 @@
             <label for="cookieCheckbox" class="icon-button">&#127850;</label>
             <div class="dropdown-content">
                 <div style="padding: 10px;">
-                    <p>Votre session expirera dans 500 minutes. Veuillez sauvegarder votre travail.</p>
+                    <p>Votre session expirera dans 5 minutes. Veuillez sauvegarder votre travail.</p>
+                    <p>Temps restant : <span id="timer">5:00</span></p>
                 </div>
             </div>
             <input type="checkbox" id="settingsCheckbox" class="modal-toggle">
             <label for="settingsCheckbox" class="icon-button">&#9881;</label>
             <div class="dropdown-content">
-                <form method="POST" action="/forum.html">
-                    <button type="submit" class="dropdown-button">Log out</button>
+                <form method="POST" action="/logout">
+                    <input type="hidden" value="{{.User.ID}}" name="userid"/>
+                    <button type="submit" class="dropdown-button">Déconnexion</button>
                 </form>
             </div>
         </div>
@@ -110,7 +85,7 @@
                 <div class="dropdown-content">
                     <form method="POST" action="/comment">
                         <input type="hidden" name="post_id" value="{{.ID}}">
-                        <textarea name="comment" rows="4" cols="50" placeholder="Type your comment here..."></textarea>
+                        <textarea name="comment" rows="4" cols="50" placeholder="Écrire un commentaire..."></textarea>
                         <button type="submit">Envoyer</button>
                     </form>
                 </div>
@@ -128,8 +103,7 @@
                         </form>
                         <form method="POST" action="/dislikeComment">
                             <input type="hidden" name="comment_id" value="{{.ID}}">
-                            <button type="submit" class="dislike-button" {{if
-                                .UserDisliked}}disabled{{end}}>Dislike</button>
+                            <button type="submit" class="dislike-button" {{if .UserDisliked}}disabled{{end}}>Dislike</button>
                         </form>
                     </div>
                     <p>Likes: {{.Likes}} | Dislikes: {{.Dislikes}}</p>
@@ -142,10 +116,6 @@
 
     <footer>
         <div class="nav-button">
-            <button class="icon-button" onclick="window.location.href='/forum'">&#8962;</button>
-            <p>Home</p>
-        </div>
-        <div class="nav-button">
             <button class="icon-button" onclick="window.location.href='/post.html'">&#43;</button>
             <p>Post</p>
         </div>
@@ -155,39 +125,20 @@
             </button>
             <p>Profil</p>
         </div>
-        <div class="nav-button">
-            <button class="login-button">&#128274;</button>
-            <p>Log in</p>
-        </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const loginButton = document.querySelector('.login-button');
-            const loginPopup = document.getElementById('loginPopup');
-            const closeButton = document.querySelector('.close-btn');
-            const backdrop = document.querySelector('.backdrop');
-
-            function showLoginPopup() {
-                loginPopup.style.display = 'block';
-                backdrop.style.display = 'block';
-            }
-
-            function hideLoginPopup() {
-                loginPopup.style.display = 'none';
-                backdrop.style.display = 'none';
-            }
-
-            loginButton.addEventListener('click', showLoginPopup);
-
-            closeButton.addEventListener('click', hideLoginPopup);
-            backdrop.addEventListener('click', hideLoginPopup);
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                document.getElementById('session-warning').style.display = 'block';
+                startTimer();
+            }, 270000); // 4 minutes and 30 seconds in milliseconds
         });
 
         function startTimer() {
             var timerElement = document.getElementById('timer');
-            var duration = 30000; // 500 minutes in seconds
-            setInterval(function () {
+            var duration = 300; // 5 minutes in seconds
+            setInterval(function() {
                 var minutes = Math.floor(duration / 60);
                 var seconds = duration % 60;
                 timerElement.textContent = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;

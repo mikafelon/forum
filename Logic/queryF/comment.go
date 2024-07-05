@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"log"
 
-	"forum/Logic/typeF"
+	"div-01/forum/Logic/typeF"
 )
 
 func GetComments(postID string, db *sql.DB) ([]typeF.Comment, error) {
@@ -41,7 +41,7 @@ func GetComments(postID string, db *sql.DB) ([]typeF.Comment, error) {
 	return comments, nil
 }
 
-func GetUserComments(userID string, db *sql.DB) ([]typeF.Comment, error) {
+func GetUserComments(userID string, db *sql.DB) ([]typeF.Comment, error) { // Not Needed
 	query := `
         SELECT id, post_id, content, created_at
         FROM comments
@@ -62,6 +62,34 @@ func GetUserComments(userID string, db *sql.DB) ([]typeF.Comment, error) {
 		}
 		comments = append(comments, comment)
 	}
-
 	return comments, nil
+}
+
+func GetUserLikedComments(userID string, db *sql.DB) ([]typeF.Comment, error) { // Not needed
+	query := `
+        SELECT c.id, c.content, c.user_id, c.post_id, c.created_at AS comment_created_at, users.username, l.created_at AS like_created_at
+        FROM likes l
+        JOIN comments c ON l.comment_id = c.id
+        JOIN users ON c.user_id = users.id
+        WHERE l.user_id =?
+        ORDER BY l.created_at DESC`
+
+	rows, err := db.Query(query, userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var likedComments []typeF.Comment
+	for rows.Next() {
+		var comment typeF.Comment
+		var likeCreatedAt string // Temporary variable to hold the like creation time
+		err := rows.Scan(&comment.ID, &comment.Content, &comment.UserID, &comment.PostID, &comment.CreatedAt, &comment.Username, &likeCreatedAt)
+		if err != nil {
+			return nil, err
+		}
+		// Optionally, you can store likeCreatedAt somewhere relevant if needed
+		likedComments = append(likedComments, comment)
+	}
+	return likedComments, nil
 }

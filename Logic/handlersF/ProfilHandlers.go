@@ -5,8 +5,8 @@ import (
 	"html/template"
 	"net/http"
 
-	"forum/Logic/queryF"
-	"forum/Logic/typeF"
+	"div-01/forum/Logic/queryF"
+	"div-01/forum/Logic/typeF"
 )
 
 func ProfileHandler(w http.ResponseWriter, r *http.Request) {
@@ -37,15 +37,38 @@ func ProfileHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	/*
+		commentUser, err := queryF.GetUserComments(userID, db)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+			likedComment, err := queryF.GetUserLikedComment(userID, db)
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}*/
+
+	likedPost, err := queryF.GetUserLikedPosts(userID, db)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	data := struct {
 		User  typeF.User
 		Posts []typeF.Post
-		// Comment []typeF.Comment
+		// Comment      []typeF.Comment
+		// LikedComment []typeF.Comment
+		LikedPost []typeF.Post
 	}{
 		User:  user,
 		Posts: postUser,
 		// Comment: commentUser,
+		// LikedComment: likedComment,
+		LikedPost: likedPost,
 	}
+
 	tmpl.Execute(w, data)
 }

@@ -5,7 +5,7 @@ import (
 	"html/template"
 	"net/http"
 
-	"forum/Logic/queryF"
+	"div-01/forum/Logic/queryF"
 )
 
 func ServeTemplate(w http.ResponseWriter, r *http.Request) {

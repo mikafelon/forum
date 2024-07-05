@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"forum/Logic/queryF"
+	"div-01/forum/Logic/queryF"
 )
 
 func DislikeHandler(w http.ResponseWriter, r *http.Request) {
@@ -29,19 +29,13 @@ func DislikeHandler(w http.ResponseWriter, r *http.Request) {
 				http.Error(w, "Database error", http.StatusInternalServerError)
 				return
 			}
-			err = insertLikeOrDislike(postID, userID, -1, db)
+			err = queryF.InsertLikeOrDislike(postID, userID, -1, db)
 			if err == nil {
 				createNotification(postID, "dislike", db)
 			}
 		} else {
 			if existingValue == -1 {
-				_, err = db.Exec("DELETE FROM user_likes WHERE user_id = ? AND post_id = ?", userID, postID)
-				if err != nil {
-					log.Printf("Error removing dislike: %v\n", err)
-					http.Error(w, "Failed to remove dislike", http.StatusInternalServerError)
-				} else {
-					http.Redirect(w, r, "/forum", http.StatusSeeOther)
-				}
+				http.Redirect(w, r, "/forum", http.StatusSeeOther)
 				return
 			} else if existingValue == 1 {
 				_, err = db.Exec("UPDATE user_likes SET value = -1 WHERE user_id = ? AND post_id = ?", userID, postID)
@@ -86,13 +80,7 @@ func DislikeCommentHandler(w http.ResponseWriter, r *http.Request) {
 			}
 		} else {
 			if existingValue == -1 {
-				_, err = db.Exec("DELETE FROM user_likes WHERE user_id =? AND comment_id =?", userID, commentID)
-				if err != nil {
-					log.Printf("Error removing dislike: %v\n", err)
-					http.Error(w, "Failed to remove dislike", http.StatusInternalServerError)
-				} else {
-					http.Redirect(w, r, "/forum", http.StatusSeeOther)
-				}
+				http.Redirect(w, r, "/forum", http.StatusSeeOther)
 				return
 			} else if existingValue == 1 {
 				_, err = db.Exec("UPDATE user_likes SET value = -1 WHERE user_id =? AND comment_id =?", userID, commentID)

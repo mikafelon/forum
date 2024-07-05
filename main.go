@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"forum/Logic/handlersF"
+	"div-01/forum/Logic/handlersF"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -30,11 +30,12 @@ func InitDatabase() {
 }
 
 func main() {
-	print("test")
 	InitDatabase()
 	defer db.Close()
+	http.HandleFunc("/", handlersF.IndexHandler)
 	http.HandleFunc("/register", handlersF.RegisterHandler)
 	http.HandleFunc("/login", handlersF.LoginHandler)
+	http.HandleFunc("/logout", handlersF.LogoutHandler)
 	http.HandleFunc("/forum", handlersF.ForumHandler)
 	http.HandleFunc("/profile", handlersF.ProfileHandler)
 	http.HandleFunc("/post", handlersF.CreatePostHandler)
@@ -56,6 +57,8 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	// Serve templates
+	http.HandleFunc("/register.html", handlersF.ServeTemplate)
+	http.HandleFunc("/login.html", handlersF.ServeTemplate)
 	http.HandleFunc("/forum.html", handlersF.ServeTemplate)
 	http.HandleFunc("/profile.html", handlersF.ServeTemplate)
 	log.Println("Server started at :8080")

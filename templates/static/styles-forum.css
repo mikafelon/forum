@@ -1,14 +1,15 @@
 body {
     margin: 0;
-    font-family: system-ui;
+    font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     height: 100vh;
     overflow: hidden;
+    /* Prevent body from scrolling */
 }
 
 .background-gradient {
-    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1);
+    background: linear-gradient(45deg, #f3b42c,  #f1c25a);
     width: 100%;
     height: 100%;
     display: flex;
@@ -20,12 +21,14 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1);
+    background: linear-gradient(45deg, #f3b42c,  #f1c25a);
+    /* Semi-transparent background */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
 }
 
 .title {
+    font-family: 'Brush Script MT', cursive;
     font-size: 2em;
     color: #333;
     margin: 0;
@@ -48,6 +51,7 @@ header {
     align-items: center;
     padding: 5px;
     background-color: rgba(240, 240, 240, 0.7);
+    /* Semi-transparent background */
     flex-shrink: 0;
     justify-content: center;
 }
@@ -141,9 +145,23 @@ footer {
     justify-content: space-around;
     align-items: center;
     padding: 3px 0;
-    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1);
+    background: linear-gradient(45deg, #4788bd,  #63aae4, #80bef0);
+    animation: gradientAnimation 1s ease infinite;
+    /* Semi-transparent background */
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .nav-button {
@@ -177,11 +195,16 @@ footer {
 
 .like-button {
     background-color: #4CAF50;
+    /* Vert */
 }
 
 .dislike-button {
     background-color: #f44336;
+    /* Rouge */
 }
+
+
+/* Add this CSS to your existing styles-forum.css */
 
 .modal-toggle {
     display: none;
@@ -217,14 +240,20 @@ footer {
     cursor: pointer;
     border: none;
     background-color: #f44336;
+    /* Red background */
     color: white;
+    /* White text */
     border-radius: 5px;
     width: 100%;
 }
 
 .dropdown-button:hover {
     background-color: #d32f2f;
+    /* Darker red */
 }
+
+
+/* Add this CSS to your existing styles-forum.css */
 
 .header-buttons {
     position: relative;
@@ -261,6 +290,7 @@ footer {
     z-index: 1;
     right: 0;
     top: 40px;
+    /* Adjust this value based on the height of the header */
     border-radius: 8px;
     padding: 10px 0;
 }
@@ -307,6 +337,9 @@ footer {
     border-radius: 50%;
 }
 
+
+/* styles-forum.css */
+
 .modal-toggle {
     display: none;
 }
@@ -341,6 +374,7 @@ footer {
 .comments-section {
     margin-top: 20px;
     max-height: 150px;
+    /* Height for the scroll */
     overflow-y: auto;
 }
 
@@ -416,6 +450,12 @@ footer {
     margin-left: 5px;
 }
 
+
+/* styles-forum.css */
+
+
+/* Styles for the search and filter container */
+
 .search-filter-container {
     text-align: center;
     margin: 20px 0;
@@ -441,6 +481,9 @@ footer {
     background-color: #0056b3;
 }
 
+
+/* Ensure the header-buttons and search-filter-container are properly aligned */
+
 .header {
     display: flex;
     flex-direction: column;
@@ -452,75 +495,4 @@ footer {
     justify-content: flex-end;
     width: 100%;
     margin-top: 10px;
-}
-
-.login-popup {
-    position: fixed;
-    width: 300px;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 20;
-    display: flex;
-    flex-direction: column;
-}
-
-.popup-content {
-    display: flex;
-    flex-direction: column;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="submit"] {
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    width: calc(100% - 22px);
-}
-
-input[type="submit"] {
-    background-color: #162016;
-    color: white;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-.close-btn:hover {
-    color: #f44336;
-}
-
-.close-btn {
-    position: absolute;
-    font-size: xx-large;
-    top: -8px;
-    right: 0px;
-    padding-right: 6px;
-    cursor: pointer;
-}
-
-.login-content,
-.register-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 10;
 }

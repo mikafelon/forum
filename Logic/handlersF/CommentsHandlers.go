@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"forum/Logic/queryF"
-	"forum/Logic/typeF"
+	"div-01/forum/Logic/queryF"
+	"div-01/forum/Logic/typeF"
 
 	"github.com/google/uuid"
 )
@@ -67,6 +67,10 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		postID := r.FormValue("post_id")
 		content := r.FormValue("comment")
+		if content == "" {
+			http.Error(w, "You cannot send an empty comment", http.StatusBadRequest)
+			return
+		}
 		commentID := uuid.New().String()
 		createdAt := time.Now().Format(time.RFC3339)
 		query := "INSERT INTO comments (id, content, user_id, post_id, created_at) VALUES (?, ?, ?, ?, ?)"

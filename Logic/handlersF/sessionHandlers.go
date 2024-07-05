@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	"forum/Logic/queryF"
-	"forum/Logic/sessionF"
+	"div-01/forum/Logic/queryF"
+	"div-01/forum/Logic/sessionF"
 )
 
 func ExtendSessionHandler(w http.ResponseWriter, r *http.Request) {
@@ -17,7 +17,7 @@ func ExtendSessionHandler(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 	userID, err := queryF.GetSessionUserID(r, db)
 	if err != nil || userID == "guest" {
-		http.Redirect(w, r, "/forum.html", http.StatusSeeOther)
+		http.Redirect(w, r, "/login.html", http.StatusSeeOther)
 		return
 	}
 
@@ -27,7 +27,7 @@ func ExtendSessionHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	expiration := time.Now().Add(500 * time.Minute)
+	expiration := time.Now().Add(5 * time.Minute)
 	cookie := http.Cookie{
 		Name:     "session_id",
 		Value:    sessionID,

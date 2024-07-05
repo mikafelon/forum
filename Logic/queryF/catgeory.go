@@ -2,8 +2,9 @@ package queryF
 
 import (
 	"database/sql"
+	"log"
 
-	"forum/Logic/typeF"
+	"div-01/forum/Logic/typeF"
 )
 
 func GetCategories(db *sql.DB) ([]typeF.Category, error) {
@@ -21,4 +22,15 @@ func GetCategories(db *sql.DB) ([]typeF.Category, error) {
 		categories = append(categories, category)
 	}
 	return categories, nil
+}
+
+func InsertCategoriesPost(id, postID, categoryID string, db *sql.DB) error {
+	query := "INSERT INTO post_categories (id, post_id, category_id) VALUES (?, ?, ?)"
+	log.Println("Executing query:", query)
+	log.Println("With values:", id, postID, categoryID)
+	_, err := db.Exec(query, id, postID, categoryID)
+	if err != nil {
+		log.Printf("Error executing insert post query: %v\n", err)
+	}
+	return err
 }

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"forum/Logic/sessionF"
+	"div-01/forum/Logic/sessionF"
 )
 
 func GetSessionUserID(r *http.Request, db *sql.DB) (string, error) {
@@ -38,7 +38,7 @@ func SetSessionCookie(w http.ResponseWriter, userID string, db *sql.DB) {
 		http.Error(w, "Failed to create session", http.StatusInternalServerError)
 		return
 	}
-	expiration := time.Now().Add(500 * time.Minute) // 5 minutes session
+	expiration := time.Now().Add(15 * time.Minute) // 15 minutes session
 	cookie := http.Cookie{
 		Name:     "session_id",
 		Value:    sessionID,

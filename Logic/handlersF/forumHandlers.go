@@ -5,8 +5,8 @@ import (
 	"html/template"
 	"net/http"
 
-	"forum/Logic/queryF"
-	"forum/Logic/typeF"
+	"div-01/forum/Logic/queryF"
+	"div-01/forum/Logic/typeF"
 )
 
 func ForumHandler(w http.ResponseWriter, r *http.Request) {
@@ -18,7 +18,7 @@ func ForumHandler(w http.ResponseWriter, r *http.Request) {
 	userID, err := queryF.GetSessionUserID(r, db)
 	if err != nil || userID == "guest" {
 		// Rediriger vers la page de login si la session est expirée ou absente
-		http.Redirect(w, r, "/forum.html", http.StatusSeeOther)
+		http.Redirect(w, r, "/login.html", http.StatusSeeOther)
 		return
 	}
 
@@ -54,7 +54,6 @@ func ForumHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Failed to mark notifications as read", http.StatusInternalServerError)
 		return
 	}
-
 	categories, err := queryF.GetCategories(db)
 	if err != nil {
 		http.Error(w, "Failed to load categories", http.StatusInternalServerError)
