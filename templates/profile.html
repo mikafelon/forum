@@ -23,41 +23,13 @@
                         <h3>{{.Title}} - {{.Username}}</h3>
                         <p>{{.Content}}</p>
                         <span>{{.CreatedAt}}</span>
-                        <div class="buttons">
-                            <form method="POST" action="/like">
-                                <input type="hidden" name="post_id" value="{{.ID}}">
-                                <button type="submit" class="like-button" {{if .UserLiked}}disabled{{end}}>Like</button>
-                            </form>
-                            <form method="POST" action="/dislike">
-                                <input type="hidden" name="post_id" value="{{.ID}}">
-                                <button type="submit" class="dislike-button" {{if .UserDisliked}}disabled{{end}}>Dislike</button>
-                            </form>
-                            <input type="checkbox" id="commentCheckbox{{.ID}}" class="modal-toggle">
-                            <label for="commentCheckbox{{.ID}}" class="icon-button">&#9998;</label>
-                            <div class="dropdown-content">
-                                <form method="POST" action="/comment">
-                                    <input type="hidden" name="post_id" value="{{.ID}}">
-                                    <textarea name="comment" rows="4" cols="50" placeholder="Écrire un commentaire..."></textarea>
-                                    <button type="submit">Envoyer</button>
-                                </form>
-                            </div>
-                        </div>
+
                         <p>Likes: {{.Likes}} | Dislikes: {{.Dislikes}}</p>
                         <div class="comments-section">
                             {{range .Comments}}
                             <div class="comment">
                                 <p><strong>{{.Username}}:</strong> {{.Content}}</p>
                                 <span>{{.CreatedAt}}</span>
-                                <div class="buttons">
-                                    <form method="POST" action="/likeComment">
-                                        <input type="hidden" name="comment_id" value="{{.ID}}">
-                                        <button type="submit" class="like-button" {{if .UserLiked}}disabled{{end}}>Like</button>
-                                    </form>
-                                    <form method="POST" action="/dislikeComment">
-                                        <input type="hidden" name="comment_id" value="{{.ID}}">
-                                        <button type="submit" class="dislike-button" {{if .UserDisliked}}disabled{{end}}>Dislike</button>
-                                    </form>
-                                </div>
                                 <p>Likes: {{.Likes}} | Dislikes: {{.Dislikes}}</p>
                             </div>
                             {{end}}
@@ -72,41 +44,12 @@
                         <h3>{{.Title}} - {{.Username}}</h3>
                         <p>{{.Content}}</p>
                         <span>{{.CreatedAt}}</span>
-                        <div class="buttons">
-                            <form method="POST" action="/like">
-                                <input type="hidden" name="post_id" value="{{.ID}}">
-                                <button type="submit" class="like-button" {{if .UserLiked}}disabled{{end}}>Like</button>
-                            </form>
-                            <form method="POST" action="/dislike">
-                                <input type="hidden" name="post_id" value="{{.ID}}">
-                                <button type="submit" class="dislike-button" {{if .UserDisliked}}disabled{{end}}>Dislike</button>
-                            </form>
-                            <input type="checkbox" id="commentCheckbox{{.ID}}" class="modal-toggle">
-                            <label for="commentCheckbox{{.ID}}" class="icon-button">&#9998;</label>
-                            <div class="dropdown-content">
-                                <form method="POST" action="/comment">
-                                    <input type="hidden" name="post_id" value="{{.ID}}">
-                                    <textarea name="comment" rows="4" cols="50" placeholder="Écrire un commentaire..."></textarea>
-                                    <button type="submit">Envoyer</button>
-                                </form>
-                            </div>
-                        </div>
                         <p>Likes: {{.Likes}} | Dislikes: {{.Dislikes}}</p>
                         <div class="comments-section">
                             {{range .Comments}}
                             <div class="comment">
                                 <p><strong>{{.Username}}:</strong> {{.Content}}</p>
                                 <span>{{.CreatedAt}}</span>
-                                <div class="buttons">
-                                    <form method="POST" action="/likeComment">
-                                        <input type="hidden" name="comment_id" value="{{.ID}}">
-                                        <button type="submit" class="like-button" {{if .UserLiked}}disabled{{end}}>Like</button>
-                                    </form>
-                                    <form method="POST" action="/dislikeComment">
-                                        <input type="hidden" name="comment_id" value="{{.ID}}">
-                                        <button type="submit" class="dislike-button" {{if .UserDisliked}}disabled{{end}}>Dislike</button>
-                                    </form>
-                                </div>
                                 <p>Likes: {{.Likes}} | Dislikes: {{.Dislikes}}</p>
                             </div>
                             {{end}}
@@ -114,9 +57,6 @@
                     </div>
                     {{end}}
                 </section>
-             
-
-
             </div>
         </div>
         <footer>

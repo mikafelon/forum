@@ -9,7 +9,7 @@ import (
 
 func CreateSession(userID string, db *sql.DB) (string, error) {
 	sessionID := uuid.New().String()
-	expiresAt := time.Now().Add(5 * time.Minute) // 5 minutes session
+	expiresAt := time.Now().Add(15 * time.Minute) // 15 minutes session
 
 	// Invalidate existing sessions for the user
 	_, err := db.Exec("DELETE FROM sessions WHERE user_id =?", userID)

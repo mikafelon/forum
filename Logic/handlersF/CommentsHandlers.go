@@ -68,6 +68,11 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		postID := r.FormValue("post_id")
 		content := r.FormValue("comment")
+		// Validate that the content is not just whitespace
+		if strings.TrimSpace(content) == "" {
+			http.Error(w, "Content must not be empty or consist only of whitespace", http.StatusBadRequest)
+			return
+		}
 		if content == "" {
 			http.Error(w, "You cannot send an empty comment", http.StatusBadRequest)
 			return
