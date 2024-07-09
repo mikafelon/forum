@@ -197,7 +197,7 @@ func GetUserLikedPosts(userID string, db *sql.DB) ([]typeF.Post, error) {
             FROM posts
             JOIN user_likes ON posts.id = user_likes.post_id
 			JOIN users ON posts.user_id = users.id
-            WHERE user_likes.user_id =?
+            WHERE user_likes.user_id =? AND user_likes.value = 1
 			GROUP BY posts.id, users.username
             ORDER BY posts.created_at DESC`
 
@@ -224,7 +224,3 @@ func GetUserLikedPosts(userID string, db *sql.DB) ([]typeF.Post, error) {
 	}
 	return likedPosts, nil
 }
-
-/*
-
- */

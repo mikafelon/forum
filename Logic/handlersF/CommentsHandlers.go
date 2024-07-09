@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"html/template"
 	"net/http"
+	"strings"
 	"time"
 
 	"div-01/forum/Logic/queryF"
@@ -69,6 +70,10 @@ func CommentHandler(w http.ResponseWriter, r *http.Request) {
 		content := r.FormValue("comment")
 		if content == "" {
 			http.Error(w, "You cannot send an empty comment", http.StatusBadRequest)
+			return
+		}
+		if strings.TrimSpace(content) == "" {
+			http.Error(w, "You cannot send an empty comment or only spaces", http.StatusBadRequest)
 			return
 		}
 		commentID := uuid.New().String()

@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 
 	"div-01/forum/Logic/queryF"
@@ -18,7 +19,7 @@ func CreatePostHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer db.Close()
 	userID, err := queryF.GetSessionUserID(r, db)
-	if err != nil || userID == "" {
+	if err != nil || userID == "guest" {
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 		return
 	}
@@ -37,6 +38,10 @@ func CreatePostHandler(w http.ResponseWriter, r *http.Request) {
 		input.Title = r.FormValue("title")
 		input.Content = r.FormValue("content")
 		categoryIDs := r.MultipartForm.Value["category_id[]"]
+		if strings.TrimSpace(input.Content) == "" {
+			http.Error(w, "Content cannot be empty or just spaces", http.StatusBadRequest)
+			return
+		}
 		if input.Title == "" || input.Content == "" || categoryIDs[0] == "" {
 			http.Error(w, "Title, Content, and Category are required", http.StatusBadRequest)
 			return
