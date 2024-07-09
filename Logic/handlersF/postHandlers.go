@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 
 	"div-01/forum/Logic/queryF"
@@ -18,12 +19,12 @@ func CreatePostHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer db.Close()
 	userID, err := queryF.GetSessionUserID(r, db)
-	if err != nil || userID == "" {
+	if err != nil || userID == "guest" {
 		http.Error(w, "Unauthorized", http.StatusUnauthorized)
 		return
 	}
 	if r.Method == http.MethodPost {
-		err := r.ParseMultipartForm(10 << 20) // 10 MB max memory
+		err := r.ParseMultipartForm(10 << 20)
 		if err != nil {
 			log.Println("Error parsing multipart form:", err)
 			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -37,6 +38,12 @@ func CreatePostHandler(w http.ResponseWriter, r *http.Request) {
 		input.Title = r.FormValue("title")
 		input.Content = r.FormValue("content")
 		categoryIDs := r.MultipartForm.Value["category_id[]"]
+
+		// Validate that the content is not just whitespace
+		if strings.TrimSpace(input.Content) == "" {
+			http.Error(w, "Content must not be empty or consist only of whitespace", http.StatusBadRequest)
+			return
+		}
 		if input.Title == "" || input.Content == "" || categoryIDs[0] == "" {
 			http.Error(w, "Title, Content, and Category are required", http.StatusBadRequest)
 			return

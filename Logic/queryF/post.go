@@ -167,13 +167,19 @@ func GetFilteredPosts(userID, categoryID, searchQuery string, db *sql.DB) ([]typ
 
 func GetUserPosts(userID string, db *sql.DB) ([]typeF.Post, error) {
 	query := `
-        SELECT posts.id, posts.user_id, posts.title, posts.content, posts.created_at, users.username
+        SELECT 
+            posts.id, posts.user_id, posts.title, posts.content, posts.created_at, users.username,
+            COALESCE(SUM(CASE WHEN user_likes.value = 1 THEN 1 ELSE 0 END), 0) AS likes,
+            COALESCE(SUM(CASE WHEN user_likes.value = -1 THEN 1 ELSE 0 END), 0) AS dislikes,
+            COALESCE(user_likes.value, 0) AS user_like_value -- Removed dynamic placeholder
         FROM posts
         JOIN users ON posts.user_id = users.id
-        WHERE posts.user_id =?
+        LEFT JOIN user_likes ON posts.id = user_likes.post_id AND user_likes.user_id = ?
+        WHERE posts.user_id = ?
         GROUP BY posts.id, users.username
         ORDER BY posts.created_at DESC`
-	rows, err := db.Query(query, userID)
+
+	rows, err := db.Query(query, userID, userID)
 	if err != nil {
 		return nil, err
 	}
@@ -182,28 +188,38 @@ func GetUserPosts(userID string, db *sql.DB) ([]typeF.Post, error) {
 	var posts []typeF.Post
 	for rows.Next() {
 		var post typeF.Post
-		err := rows.Scan(&post.ID, &post.UserID, &post.Title, &post.Content, &post.CreatedAt, &post.Username)
+		var likes, dislikes, userLikeValue int
+		err := rows.Scan(&post.ID, &post.UserID, &post.Title, &post.Content, &post.CreatedAt, &post.Username, &likes, &dislikes, &userLikeValue)
 		if err != nil {
 			return nil, err
 		}
+		post.Likes = likes
+		post.Dislikes = dislikes
+		post.UserLiked = userLikeValue == 1
+		post.UserDisliked = userLikeValue == -1
 		posts = append(posts, post)
+	}
+	if err = rows.Err(); err != nil {
+		return nil, err
 	}
 	return posts, nil
 }
 
 func GetUserLikedPosts(userID string, db *sql.DB) ([]typeF.Post, error) {
 	query := `
-            SELECT posts.id, posts.title, posts.content, posts.created_at, users.username
-            FROM posts
-            JOIN user_likes ON posts.id = user_likes.post_id
-			JOIN users ON posts.user_id = users.id
-            WHERE user_likes.user_id =?
-			GROUP BY posts.id, users.username
-            ORDER BY posts.created_at DESC`
+        SELECT posts.id, posts.title, posts.content, posts.created_at, users.username,
+               COALESCE(SUM(CASE WHEN user_likes.value = 1 THEN 1 ELSE 0 END), 0) AS likes,
+               COALESCE(SUM(CASE WHEN user_likes.value = -1 THEN 1 ELSE 0 END), 0) AS dislikes,
+               COALESCE(user_likes.value, 0) AS user_like_value
+        FROM posts
+        JOIN users ON posts.user_id = users.id
+        LEFT JOIN user_likes ON posts.id = user_likes.post_id AND user_likes.user_id = ?
+        WHERE user_likes.user_id = ? AND user_likes.value = 1
+        GROUP BY posts.id, users.username
+        ORDER BY posts.created_at DESC`
 
-	rows, err := db.Query(query, userID)
+	rows, err := db.Query(query, userID, userID)
 	if err != nil {
-		log.Printf("Error querying for liked posts: %v\n", err)
 		return nil, err
 	}
 	defer rows.Close()
@@ -211,20 +227,19 @@ func GetUserLikedPosts(userID string, db *sql.DB) ([]typeF.Post, error) {
 	var likedPosts []typeF.Post
 	for rows.Next() {
 		var post typeF.Post
-		err := rows.Scan(&post.ID, &post.Title, &post.Content, &post.CreatedAt, &post.Username)
+		var likes, dislikes, userLikeValue int
+		err := rows.Scan(&post.ID, &post.Title, &post.Content, &post.CreatedAt, &post.Username, &likes, &dislikes, &userLikeValue)
 		if err != nil {
-			log.Printf("Error scanning row: %v\n", err)
 			return nil, err
 		}
+		post.Likes = likes
+		post.Dislikes = dislikes
+		post.UserLiked = userLikeValue == 1
+		post.UserDisliked = userLikeValue == -1
 		likedPosts = append(likedPosts, post)
 	}
 	if err = rows.Err(); err != nil {
-		log.Printf("Database error: %v\n", err)
 		return nil, err
 	}
 	return likedPosts, nil
 }
-
-/*
-
- */
